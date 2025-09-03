@@ -33,7 +33,6 @@ body {
   justify-content: center;
   align-items: flex-start;
 
-  padding-top: 100px;
   margin: 0;
 }
 
@@ -45,6 +44,7 @@ p {
   height: 100%;
   width: 100%;
 
+  user-select: none;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -104,18 +104,18 @@ p {
   display: flex;
   gap: 10px;
 
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: auto;
 
   cursor: grab;
-  user-select: none;
 }
 
-.hours:active{
+.hours:active {
   cursor: grabbing;
 }
 
 .hour {
-  flex: 0 0 auto; 
+  flex: 0 0 auto;
 
   display: flex;
   flex-direction: column;
@@ -128,3 +128,35 @@ p {
   height: 95px;
   padding-bottom: 10px;
 }
+
+#search-container {
+  align-self: flex-end;
+  display: flex;
+  gap: 5px;
+
+  border: 1px solid rgba(37, 58, 99, 0.255);
+  background-color: #00000014;
+
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 100px;
+}
+
+#search-icon {
+  align-self: flex-end;
+  width: 25px;
+  height: 25px;
+
+  cursor: pointer;
+}
+
+#search-field {
+  all: unset;
+  border: none;
+  background: none;
+}
+
+#search-field::placeholder{
+  color: rgba(255, 255, 255, 0.555);
+}
+

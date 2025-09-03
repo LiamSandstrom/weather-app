@@ -10,12 +10,20 @@ export class UIManager {
     this.#ui = ui;
   }
 
+  initialize(){
+    this.#ui.bindSearch(this.search.bind(this));
+  }
+
   async search(location) {
     this.#ui.fadeOut();
     await this.#weatherManager.getNewWeather(location).then((weatherObj) => {
       this.refresh(weatherObj);
       this.#ui.fadeIn();
-    });
+    })
+    .catch((e) => {
+        this.#ui.fadeIn();
+        alert("Valid city please.")
+    })
   }
 
   refresh(weatherObj) {
@@ -24,6 +32,7 @@ export class UIManager {
     this.#ui.setHighest(weatherObj.tempMax);
     this.#ui.setLowest(weatherObj.tempMin);
     this.#ui.setIcon(weatherObj.icon);
+    this.#ui.removeCards();
     console.log(getHour());
 
     for (let i = getHour(); i < weatherObj.hours.length; i++) {
@@ -37,5 +46,6 @@ export class UIManager {
 
   testSearch(location) {
     this.refresh(this.#weatherManager.testWeather());
+      this.#ui.fadeIn();
   }
 }

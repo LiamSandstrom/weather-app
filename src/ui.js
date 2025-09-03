@@ -1,5 +1,6 @@
 import { capitalize } from "./helpers";
 import { getIcon } from "./helpers";
+import logo from "./searchIcon.svg";
 
 export default class UI {
   #location;
@@ -10,6 +11,8 @@ export default class UI {
   #icon;
   #hoursContainer;
   #wrapper;
+  #searchIcon;
+  #searchField;
 
   constructor() {
     this.#location = document.querySelector("#weather-now-location");
@@ -20,6 +23,32 @@ export default class UI {
     this.#icon = document.querySelector("#weather-now-icon");
     this.#hoursContainer = document.querySelector(".hours");
     this.#wrapper = document.querySelector(".wrapper");
+    this.#searchIcon = document.querySelector("#search-icon");
+    this.#searchField = document.querySelector("#search-field");
+  }
+
+  initialize() {
+    this.setSearchIcon(logo);
+  }
+
+  setSearchIcon(icon) {
+    this.#searchIcon.src = logo;
+  }
+
+  bindSearch(handler) {
+    this.#searchIcon.addEventListener("click", () => {
+      handler(this.#getSearchLocation());
+    });
+
+    this.#searchField.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        handler(this.#getSearchLocation());
+      }
+    });
+  }
+
+  #getSearchLocation() {
+    return this.#searchField.value;
   }
 
   setLocation(location) {
@@ -69,6 +98,10 @@ export default class UI {
     this.#hoursContainer.appendChild(container);
   }
 
+  removeCards(){
+    this.#hoursContainer.innerHTML = ""
+  }
+
   formatHour(hour) {
     if (hour < 10) {
       return `0${hour}:00`;
@@ -78,9 +111,13 @@ export default class UI {
   }
 
   fadeOut() {
+    this.#wrapper.style.transition = "opacity 0.1s"
     this.#wrapper.style.opacity = "0%";
+    console.log("FADE OUT")
   }
   fadeIn() {
+    this.#wrapper.style.transition = "opacity 1s"
     this.#wrapper.style.opacity = "100%";
+    console.log("FADE IN")
   }
 }

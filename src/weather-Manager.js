@@ -14,7 +14,7 @@ export default class WeatherManager {
     if (this.#location.toLowerCase() === location.toLowerCase())
       return this.#weather;
 
-    const weatherJson = await this.#fetchWeather(location);
+    const weatherJson = await this.#fetchWeather(location)
     const weatherObj = this.#processWeather(weatherJson);
     this.#setWeather(weatherObj);
     this.#setLocation(location);
@@ -27,7 +27,7 @@ export default class WeatherManager {
 
     const obj = {
       currentTemp: weather.days[0].hours[getHour()].temp,
-      location: weather.address,
+      location: weather.resolvedAddress,
       icon: weather.days[0].hours[getHour()].icon,
       hours: weather.days[0].hours,
       tempMax: weather.days[0].tempmax,

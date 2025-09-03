@@ -9,8 +9,12 @@ const ui = new UI();
 const weatherManager = new WeatherManager();
 const uiManager = new UIManager(ui, weatherManager)
 
-uiManager.search("stockholm")
-//uiManager.testSearch();
+
+
+ui.initialize();
+uiManager.initialize();
+//uiManager.search("stockholm")
+uiManager.testSearch();
 
 
   
