@@ -1,5 +1,6 @@
 import { capitalize } from "./helpers";
 import { getIcon } from "./helpers";
+import { getBackground } from "./helpers";
 import logo from "./searchIcon.svg";
 
 export default class UI {
@@ -13,6 +14,7 @@ export default class UI {
   #wrapper;
   #searchIcon;
   #searchField;
+  #background;
 
   constructor() {
     this.#location = document.querySelector("#weather-now-location");
@@ -25,6 +27,7 @@ export default class UI {
     this.#wrapper = document.querySelector(".wrapper");
     this.#searchIcon = document.querySelector("#search-icon");
     this.#searchField = document.querySelector("#search-field");
+    this.#background = document.body;
   }
 
   initialize() {
@@ -32,7 +35,7 @@ export default class UI {
   }
 
   setSearchIcon(icon) {
-    this.#searchIcon.src = logo;
+    this.#searchIcon.src = icon;
   }
 
   bindSearch(handler) {
@@ -75,6 +78,10 @@ export default class UI {
     this.#icon.textContent = getIcon(icon);
   }
 
+  setBackground(icon){
+    this.#background.style.background = getBackground(icon)
+  }
+
   addTempSign(text) {
     return text + "°";
   }
@@ -113,11 +120,9 @@ export default class UI {
   fadeOut() {
     this.#wrapper.style.transition = "opacity 0.1s"
     this.#wrapper.style.opacity = "0%";
-    console.log("FADE OUT")
   }
   fadeIn() {
     this.#wrapper.style.transition = "opacity 1s"
     this.#wrapper.style.opacity = "100%";
-    console.log("FADE IN")
   }
 }

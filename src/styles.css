@@ -95,9 +95,13 @@ p {
 
   max-width: 100%;
 
-  border: 2px solid rgba(93, 93, 93, 0.086);
+}
+
+.hours-container, #search-container{
+
   border-radius: 10px;
-  background-color: var(--primary);
+  background-color: rgba(0, 0, 0, 0.064);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.163);
 }
 
 .hours {
@@ -134,12 +138,11 @@ p {
   display: flex;
   gap: 5px;
 
-  border: 1px solid rgba(37, 58, 99, 0.255);
-  background-color: #00000014;
-
   border-radius: 10px;
   padding: 5px;
   margin-bottom: 100px;
+
+  border: 1px solid #383a3f13;
 }
 
 #search-icon {

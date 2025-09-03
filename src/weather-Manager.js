@@ -14,17 +14,14 @@ export default class WeatherManager {
     if (this.#location.toLowerCase() === location.toLowerCase())
       return this.#weather;
 
-    const weatherJson = await this.#fetchWeather(location)
+    const weatherJson = await this.#fetchWeather(location);
     const weatherObj = this.#processWeather(weatherJson);
     this.#setWeather(weatherObj);
     this.#setLocation(location);
-    console.log("Done!");
     return this.#weather;
   }
 
   #processWeather(weather) {
-    console.log("processing...");
-
     const obj = {
       currentTemp: weather.days[0].hours[getHour()].temp,
       location: weather.resolvedAddress,
@@ -34,13 +31,10 @@ export default class WeatherManager {
       tempMin: weather.days[0].tempmin,
       description: weather.days[0].description,
     };
-    console.log(obj);
     return obj;
   }
 
-  //needs error handling
   async #fetchWeather(location) {
-    console.log("fetching...");
     const date = getCurrentDate();
     const response = await fetch(
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/${date}?key=QBJ37UJVDFD5XAB4TTL2K5QMC&unitGroup=uk`
@@ -50,7 +44,6 @@ export default class WeatherManager {
       throw new Error(response.statusText);
     }
     const json = await response.json();
-    console.log(json);
     return json;
   }
 
@@ -62,7 +55,7 @@ export default class WeatherManager {
 
   testWeather() {
     const weather = {
-      address: "Sydney",
+      location: "Sydney",
       days: [
         {
           icon: "sunny",

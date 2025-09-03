@@ -1,10 +1,9 @@
 import { getHour } from "./helpers";
 
-getHour;
-
 export class UIManager {
   #weatherManager;
   #ui;
+
   constructor(ui, weatherManager) {
     this.#weatherManager = weatherManager;
     this.#ui = ui;
@@ -32,9 +31,9 @@ export class UIManager {
     this.#ui.setHighest(weatherObj.tempMax);
     this.#ui.setLowest(weatherObj.tempMin);
     this.#ui.setIcon(weatherObj.icon);
-    this.#ui.removeCards();
-    console.log(getHour());
+    this.#ui.setBackground(weatherObj.icon);
 
+    this.#ui.removeCards();
     for (let i = getHour(); i < weatherObj.hours.length; i++) {
       this.#ui.createCard(
         i,
